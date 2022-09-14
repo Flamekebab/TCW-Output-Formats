@@ -8,6 +8,7 @@ import tcw_transcode_tools as tcw_tools
 
 # I've used my previous GUI code as a starting point so some of the comments may look familiar!
 
+
 def main(): 
     # 1. Import `QApplication` and all the required widgets
     from PyQt5 import QtWidgets
@@ -24,7 +25,8 @@ def main():
     from PyQt5 import QtGui
     from PyQt5.QtGui import QIcon
 
-    # QApplication is an object that we fiddle with. I think. We pass it the command line arguments, for some as-yet-obscure reason.
+    # QApplication is an object that we fiddle with. I think.
+    # We pass it the command line arguments, for some as-yet-obscure reason.
     app = QApplication(sys.argv)
 
     # Now we create the GUI
@@ -47,18 +49,21 @@ def main():
     def get_input_file():
 
         # input and output files need to be globally scoped
+        # (Well, they probably don't but I'm not rewriting this right now)
         global input_file
         global output_file_name
         global input_file_label
         global file_name
 
-        # First we want to get the input file - the '(*.*)' thing is where we could specify a file extension e.g. (*.flac)
+        # First we want to get the input file - the '(*.*)'
+        # thing is where we could specify a file extension e.g. (*.flac)
         file_name = QFileDialog.getOpenFileName(None, "Open file", "./", "(*.*)")
 
         # Grab the relevant part of the tuple and pass it to ffmpeg in a way it understands
         input_file = file_name[0]
 
-        # flatten the list into a string (if the filename has full stops in it then input_file_name[0] alone won't work)
+        # flatten the list into a string
+        # (if the filename has full stops in it then input_file_name[0] alone won't work)
         output_file_name = tcw_tools.output_filename_sanitiser(file_name[0])
 
         # Tell the user that we've got their file as well as hiding the old button
@@ -150,9 +155,9 @@ def main():
     layout.addWidget(transcoding_complete_label)
 
     # Add a button that kills the program:
-    closeButton = QPushButton("Close program")
-    closeButton.clicked.connect(lambda _: sys.exit())
-    layout.addWidget(closeButton)
+    close_button = QPushButton("Close program")
+    close_button.clicked.connect(lambda _: sys.exit())
+    layout.addWidget(close_button)
 
     # Then we need to actually display it:
     window.setLayout(layout)

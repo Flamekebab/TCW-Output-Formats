@@ -29,6 +29,7 @@ transcoding_tests = [
     ("stereo_test", "m4a", "3", "2"),
 ]
 
+
 # Parametrize those badboys:
 @pytest.mark.parametrize("output_file, codec, q_or_b, channels", transcoding_tests)
 def test_transcoding(output_file, codec, q_or_b, channels):
@@ -38,7 +39,8 @@ def test_transcoding(output_file, codec, q_or_b, channels):
     )
 
     # It might seem silly checking whether the file exists or not but in this context ffmpeg either works or doesn't.
-    # We could of course get clever and use ffmpeg to probe the files but I dread to think what that documentation looks like
+    # We could of course get clever and use ffmpeg to probe the files
+    # but I dread to think what that documentation looks like
     assert os.path.isfile(f"tests/{output_file}.{codec}")
 
     # After we've checked whether the files are generated we can delete them to tidy up
