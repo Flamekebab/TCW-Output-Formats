@@ -13,4 +13,7 @@ To package it up into an executable:
 
     pyinstaller gui.py --name TCW-Transcoder --onefile -w
 
-...probably.
+...probably. Remember to create/activate a venv and install the requirements.
+
+If compiling on Linux the icon file is not part of the executable - it's done using the .desktop file and the menus.
+Kinda ugly but it works.
